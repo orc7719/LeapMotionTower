@@ -6,35 +6,27 @@ public class PoleController : MonoBehaviour
 {
     public List<Hoop> hoops = new List<Hoop>();
 
-    private void OnTriggerEnter(Collider other)
+    public void AddNewHoop(Hoop hoop)
     {
-        if(other.transform.root.tag == "Hoop")
+        if (!hoops.Contains(hoop))
         {
-            Hoop hoop = other.transform.root.GetComponent<Hoop>();
-
             if (CheckHoop(hoop))
-                hoop.eject = true;
-
-
-            if (!hoops.Contains(hoop))
-                hoops.Add(hoop);
+                hoop.Eject();
+            else
+            hoops.Add(hoop);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void RemoveHoop(Hoop hoop)
     {
-        if (other.transform.root.tag == "Hoop")
-        {
-            Hoop hoop = other.transform.root.GetComponent<Hoop>();
             if (hoops.Contains(hoop))
                 hoops.Remove(hoop);
-        }
     }
 
     bool CheckHoop (Hoop hoopToCheck)
     {
         if (hoops.Count > 0)
-            if (hoops[hoops.Count].hoopSize < hoopToCheck.hoopSize)
+            if (hoops[hoops.Count - 1].hoopSize < hoopToCheck.hoopSize)
                 return true;
 
         return false;

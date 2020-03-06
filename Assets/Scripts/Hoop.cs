@@ -6,14 +6,47 @@ public class Hoop : MonoBehaviour
 {
     public int hoopSize = 0;
 
-    public bool eject = false;
+    PoleController currentPole;
 
+    bool onPole = false;
     public void DropHoop()
     {
-        if(eject)
+        if(currentPole!=null)
+        currentPole.AddNewHoop(this);
+    }
+
+    private void FixedUpdate()
+    {
+        onPole = false;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "Pole")
         {
-            eject = false;
-            GetComponent<Rigidbody>().AddForce(Vector3.up * 10);
+            onPole = true;
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Pole" && !onPole)
+        {
+            other.transform.root.GetChild(0).GetComponent<PoleController>().RemoveHoop(this);
+            currentPole = null;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Pole")
+        {
+            currentPole = other.transform.root.GetChild(0).GetComponent<PoleController>();
+        }
+    }
+
+    public void Eject()
+    {
+            GetComponent<Rigidbody>().AddForce(Vector3.up * 10);
     }
 }
