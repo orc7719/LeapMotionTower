@@ -4,31 +4,27 @@ using UnityEngine;
 
 public class PoleController : MonoBehaviour
 {
-    public List<Hoop> hoops = new List<Hoop>();
+    List<Hoop> hoops = new List<Hoop>();
 
-    public void AddNewHoop(Hoop hoop)
+    public void AddHoop(Hoop hoop)
     {
-        if (!hoops.Contains(hoop))
-        {
-            if (CheckHoop(hoop))
-                hoop.Eject();
+            if (hoops.Count > 0 && hoops[hoops.Count - 1].hoopSize < hoop.hoopSize)
+                hoop.shouldEject = true;
             else
-            hoops.Add(hoop);
-        }
+            {
+                if (!hoops.Contains(hoop))
+                    hoops.Add(hoop);
+            }
+        
+
     }
 
     public void RemoveHoop(Hoop hoop)
     {
-            if (hoops.Contains(hoop))
-                hoops.Remove(hoop);
-    }
-
-    bool CheckHoop (Hoop hoopToCheck)
-    {
-        if (hoops.Count > 0)
-            if (hoops[hoops.Count - 1].hoopSize < hoopToCheck.hoopSize)
-                return true;
-
-        return false;
+        hoop.shouldEject = false;
+        if(hoops.Contains(hoop))
+        {
+            hoops.Remove(hoop);
+        }
     }
 }

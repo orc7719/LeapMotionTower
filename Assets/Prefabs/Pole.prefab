@@ -105,9 +105,9 @@ GameObject:
   - component: {fileID: 3271924811836757667}
   - component: {fileID: 3271924811836757665}
   - component: {fileID: 3271924811836757664}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trigger
-  m_TagString: Untagged
+  m_TagString: Pole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,12 +134,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3271924811836757666}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.06
-  m_Height: 0.41
+  m_Radius: 0.01
+  m_Height: 0.225
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!114 &3271924811836757664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +152,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b38dbd95efe774dbcfdf82dec6c34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoops:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
